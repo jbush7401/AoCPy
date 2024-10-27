@@ -6,6 +6,8 @@ class Solution:
     def __init__(self):
         self.data = read_input_file("2022/day2/input.txt")
 
+
+
     def solve(self):
         print("Part 1:" + str(self.part1()))
         print("Part 1:" + str(self.part2()))
@@ -20,12 +22,17 @@ class Solution:
         score = 0
         for line in self.data:
             if line[2] == 'X':
-                score += ord(line[0]) - 87
+                score += WINNERS[ord(line[0]) - 64]
             if line[2] == 'Y':
-                score += 3 + ord(line[0]) - 87
+                score += 3 + ord(line[0]) - 64
             if line[2] == 'Z':
-                score += 6 + ord(line[0]) - 87
+                score += 6 + get_key_by_value(ord(line[0]) - 64)
         return score
+
+def get_key_by_value(val):
+    for k, v in WINNERS.items():
+        if v == val:
+            return k
 
 def is_winner(opp, player):
     opp_num = ord(opp) - 64
